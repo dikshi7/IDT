@@ -1,9 +1,9 @@
-// Helper to display loading indicator
+
 const showLoading = (isVisible) => {
   document.getElementById("loadingIndicator").hidden = !isVisible;
 };
 
-// Handle Diagnosis Button Click
+
 document.getElementById("getDiagnosis").addEventListener("click", () => {
   const symptoms = document.getElementById("symptoms").value.trim().toLowerCase();
   const resultDiv = document.getElementById("diagnosisResult");
@@ -14,11 +14,11 @@ document.getElementById("getDiagnosis").addEventListener("click", () => {
     return;
   }
 
-  showLoading(true); // Show loading indicator
+  showLoading(true); 
   resultDiv.textContent = "";
   feedbackSection.hidden = true;
 
-  // Simulated diagnosis based on predefined symptoms
+  
   setTimeout(() => {
     let diagnosis = "";
 
@@ -125,16 +125,16 @@ document.getElementById("getDiagnosis").addEventListener("click", () => {
     resultDiv.textContent = diagnosis;
     feedbackSection.hidden = false;
 
-    // Text-to-Speech Output
+    
     const synth = window.speechSynthesis;
     const utterThis = new SpeechSynthesisUtterance(diagnosis);
     synth.speak(utterThis);
 
-    showLoading(false); // Hide loading indicator
+    showLoading(false); 
   }, 1500);
 });
 
-// Voice Recognition
+
 document.getElementById("startVoiceInput").addEventListener("click", () => {
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   recognition.lang = "en-US";
@@ -150,7 +150,6 @@ document.getElementById("startVoiceInput").addEventListener("click", () => {
   recognition.start();
 });
 
-// Feedback
 document.getElementById("feedbackYes").addEventListener("click", () => {
   alert("Thank you for your feedback!");
   document.getElementById("feedbackSection").hidden = true;
