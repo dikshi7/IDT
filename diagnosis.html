@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Doctor - Diagnosis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+  <style>
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    /* Header */
+    .header {
+      background-color: #009688;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+    }
+
+    .header .logo h1 {
+      font-size: 24px;
+    }
+
+    .nav ul {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav a {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      color: #ffeb3b;
+    }
+
+    .theme-toggle button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Main Section */
+    main {
+      padding: 40px 20px;
+    }
+
+    /* Diagnosis Section */
+    .section {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .diagnosis-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group label {
+      margin-bottom: 8px;
+    }
+
+    .input-group textarea {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn.primary {
+      background-color: #009688;
+      color: #fff;
+    }
+
+    .btn.primary:hover {
+      background-color: #00796b;
+    }
+
+    .btn.secondary {
+      background-color: #4caf50;
+      color: #fff;
+    }
+
+    .btn.secondary:hover {
+      background-color: #388e3c;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 18px;
+      color: #009688;
+    }
+
+    .result {
+      font-size: 18px;
+      font-weight: 600;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .feedback {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .feedback h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #009688;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .footer a {
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .footer a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav ul {
+        flex-direction: column;
+        gap: 10px;
+        padding-left: 0;
+      }
+
+      .diagnosis-container {
+        gap: 15px;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    /* Dark Theme */
+    body.dark-theme {
+      background-color: #121212;
+      color: #fff;
+    }
+
+    body.dark-theme .header {
+      background-color: #212121;
+    }
+
+    body.dark-theme .section {
+      background-color: #1e1e1e;
+    }
+
+    body.dark-theme .btn.primary {
+      background-color: #26a69a;
+    }
+
+    body.dark-theme .btn.primary:hover {
+      background-color: #00796b;
+    }
+
+    body.dark-theme .footer {
+      background-color: #212121;
+    }
+
+    body.dark-theme .footer a {
+      color: #ffeb3b;
+    }
+
+    body.dark-theme .footer a:hover {
+      color: #ffeb3b;
+    }
+  </style>
+
+</head>
+
+<body class="light-theme">
+
+  <header class="header">
+    <div class="logo">
+      <h1>AI Doctor</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#diagnosis">Diagnosis</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="https://www.google.com/maps/search/hospitals+near+me" target="_blank">Hospitals Near Me</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle">
+      <button id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Diagnosis Section -->
+    <section id="diagnosis" class="section">
+      <div class="section-header">
+        <h2>AI Diagnosis</h2>
+        <p>Enter your symptoms, and we'll provide possible diagnoses.</p>
+      </div>
+      <div class="diagnosis-container">
+        <div class="input-group">
+          <label for="symptoms">Describe Your Symptoms</label>
+          <textarea id="symptoms" placeholder="e.g., headache, fever, cough" rows="4"></textarea>
+        </div>
+        <div class="btn-group">
+          <button id="startVoiceInput" class="btn secondary">🎤 Voice Input</button>
+          <button id="getDiagnosis" class="btn primary">Get Diagnosis</button>
+        </div>
+        <div id="loadingIndicator" class="loading" hidden>Loading...</div>
+        <div id="diagnosisResult" class="result"></div>
+        <div id="feedbackSection" class="feedback" hidden>
+          <h3>Was this helpful?</h3>
+          <button id="feedbackYes" class="btn">👍 Yes</button>
+          <button id="feedbackNo" class="btn secondary">👎 No</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2024 AI Doctor. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script src="diagnosis.js"></script>
+
+</body>
+
+</html>
