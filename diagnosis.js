@@ -1,9 +1,9 @@
-// Function to show loading indicator
+
 const showLoading = (isVisible) => {
     document.getElementById("loadingIndicator").hidden = !isVisible;
   };
   
-  // Handle diagnosis based on symptoms
+  
   document.getElementById("getDiagnosis").addEventListener("click", () => {
     const symptoms = document.getElementById("symptoms").value.toLowerCase();
     const resultDiv = document.getElementById("diagnosisResult");
@@ -122,7 +122,7 @@ const showLoading = (isVisible) => {
     resultDiv.textContent = diagnosis;
     feedbackSection.hidden = false;
   
-    // Text-to-Speech Output
+
     const synth = window.speechSynthesis;
     const utterThis = new SpeechSynthesisUtterance(diagnosis);
     synth.speak(utterThis);
@@ -130,7 +130,7 @@ const showLoading = (isVisible) => {
     showLoading(false);
   });
   
-  // Voice Recognition for Symptoms Input
+  
   document.getElementById("startVoiceInput").addEventListener("click", () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = "en-US";
@@ -146,7 +146,7 @@ const showLoading = (isVisible) => {
     recognition.start();
   });
   
-  // Feedback Handling
+
   document.getElementById("feedbackYes").addEventListener("click", () => {
     alert("Thank you for your feedback!");
     document.getElementById("feedbackSection").hidden = true;
